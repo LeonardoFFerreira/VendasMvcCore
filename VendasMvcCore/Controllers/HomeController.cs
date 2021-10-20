@@ -17,8 +17,8 @@ namespace VendasMvcCore.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
+            ViewData["Message"] = "Aplicação de vendas em Asp .Net Core Mvc";
+            ViewData["Contato"] = "Leonrado de Freitas Ferreira";
             return View();
         }
 
