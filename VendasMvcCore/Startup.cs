@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using VendasMvcCore.Data;
 
 namespace VendasMvcCore
 {
@@ -28,6 +30,9 @@ namespace VendasMvcCore
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<VendasMvcCoreContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("VendasMvcCoreContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

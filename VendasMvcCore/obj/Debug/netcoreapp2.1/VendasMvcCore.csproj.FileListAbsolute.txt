@@ -33,4 +33,3 @@ Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\VendasMvc
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\VendasMvcCore.pdb
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\VendasMvcCore.genruntimeconfig.cache
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\VendasMvcCore.csproj.CopyComplete
-Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Departamentos\Index.cshtml.g.cs
