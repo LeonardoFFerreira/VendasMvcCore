@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using VendasMvcCore.Models;
+using VendasMvcCore.Models.ViewModels;
 
 namespace VendasMvcCore.Controllers
 {
@@ -18,7 +18,7 @@ namespace VendasMvcCore.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Aplicação de vendas em Asp .Net Core Mvc";
-            ViewData["Contato"] = "Leonrado de Freitas Ferreira";
+            ViewData["Contato"] = "Leonardo de Freitas Ferreira";
             return View();
         }
 
