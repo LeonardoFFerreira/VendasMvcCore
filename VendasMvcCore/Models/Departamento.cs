@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System;
+using System.Linq;
 
 namespace VendasMvcCore.Models
 {
@@ -7,7 +9,6 @@ namespace VendasMvcCore.Models
         public int Id { get; set; }
         public string Nome { get; set; }
         public ICollection<Vendedor> Vendedores { get; set; } = new List<Vendedor>();
-
         public Departamento()
         {
         }
@@ -15,6 +16,14 @@ namespace VendasMvcCore.Models
         {
             Id = id;
             Nome = nome;
+        }
+        public void AddVendedor(Vendedor vendedor)
+        {
+            Vendedores.Add(vendedor);
+        }
+        public double TotalVendasDepartamento(DateTime dataInico, DateTime dataFinal)
+        {
+            return Vendedores.Sum(v => v.TotalVendasVendedor(dataInico, dataFinal));
         }
     }
 }

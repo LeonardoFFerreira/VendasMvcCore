@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace VendasMvcCore.Models
 {
@@ -37,6 +36,11 @@ namespace VendasMvcCore.Models
         public void RemoverVendas(Pedido pedido)
         {
             Pedidos.Remove(pedido);
+        }
+
+        public double TotalVendasVendedor(DateTime dataInicio, DateTime dataFinal)
+        {
+            return Pedidos.Where(p => p.Data >= dataInicio && p.Data <= dataFinal).Sum(p => p.Valor);
         }
     }
 }
