@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using VendasMvcCore.Data;
+using VendasMvcCore.Services;
 
 namespace VendasMvcCore
 {
@@ -34,6 +35,7 @@ namespace VendasMvcCore
             services.AddDbContext<VendasMvcCoreContext>(options => options.UseMySql(Configuration.GetConnectionString("VendasMvcCoreContext"), builder => builder.MigrationsAssembly("VendasMvcCore")));
 
             services.AddScoped<CargaDbService>();
+            services.AddScoped<VendedorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
