@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VendasMvcCore.Models;
 using VendasMvcCore.Services;
 
 namespace VendasMvcCore.Controllers
@@ -17,6 +18,19 @@ namespace VendasMvcCore.Controllers
             var list = _vendedorService.Listar();
 
             return View(list);
+        }
+
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Cadastrar(Vendedor vendedor)
+        {
+            _vendedorService.Cadastrar(vendedor);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
