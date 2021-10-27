@@ -16,7 +16,7 @@ namespace VendasMvcCore.Services
 
         public List<Departamento> Listar()
         {
-            return _context.Departamento.ToList();
+            return _context.Departamento.OrderBy(d => d.Nome).ToList();
         }
     }
 }
