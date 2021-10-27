@@ -37,5 +37,22 @@ namespace VendasMvcCore.Controllers
             _vendedorService.Cadastrar(vendedor);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Deletar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Vendedor vendedor = _vendedorService.BuscaPorId(id.Value);
+
+            if (vendedor == null)
+            {
+                return NotFound();
+            }
+
+            return View(vendedor);
+        }
     }
 }
