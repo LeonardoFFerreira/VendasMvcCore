@@ -12,6 +12,7 @@ namespace VendasMvcCore.Models
         public DateTime DataNascimento { get; set; }
         public double Salario { get; set; }
         public Departamento Departamento { get; set; }
+        public int DepartamentoID { get; set; }
 
         public ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
 
