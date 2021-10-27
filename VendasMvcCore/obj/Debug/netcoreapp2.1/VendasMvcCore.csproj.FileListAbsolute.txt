@@ -40,3 +40,4 @@ Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Vie
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Departamentos\Index.cshtml.g.cs
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Vendedores\Index.cshtml.g.cs
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Vendedores\Cadastrar.cshtml.g.cs
+Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Vendedores\Deletar.cshtml.g.cs

@@ -54,5 +54,13 @@ namespace VendasMvcCore.Controllers
 
             return View(vendedor);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Deletar(int id)
+        {
+            _vendedorService.Deletar(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Deletar";
 }
-<h2>@ViewData["Title"]</h2>
+<h2 class="text-info">@ViewData["Title"]</h2>
 
-<h3>Dejesa realmente deletar esse vendedor ?</h3>
+<h3>Deseja realmente deletar esse vendedor ?</h3>
 
 <div>
-    <h4>Vendedores</h4>
+    <h4>Vendedor:</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -35,16 +35,10 @@
         <dd>
             @Html.DisplayFor(model => model.Salario)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Departamento.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Departamento.Nome)
-        </dd>
     </dl>
     <form asp-action="Deletar">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Deletar" class="btn btn-danger" />
-        <a asp-action="Index">Voltar</a>
+        <input type="submit" value="Sim" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-danger">Não</a>
     </form>
 </div>
