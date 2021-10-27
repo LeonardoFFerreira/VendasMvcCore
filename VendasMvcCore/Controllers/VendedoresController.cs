@@ -62,5 +62,21 @@ namespace VendasMvcCore.Controllers
             _vendedorService.Deletar(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Detalhes(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Vendedor vendedor = _vendedorService.BuscaPorId(id.Value);
+            if (vendedor == null)
+            {
+                return NotFound();
+            }
+
+            return View(vendedor);
+        }
     }
 }
