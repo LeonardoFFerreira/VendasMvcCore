@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using VendasMvcCore.Data;
 using VendasMvcCore.Models;
 
@@ -26,6 +24,19 @@ namespace VendasMvcCore.Services
         public void Cadastrar(Vendedor vendedor)
         {
             _context.Add(vendedor);
+            _context.SaveChanges();
+        }
+
+        public Vendedor BuscaPorId(int id)
+        {
+            return _context.Vendedor.FirstOrDefault(v => v.Id == id);
+        }
+
+        public void Deletar(int id)
+        {
+            Vendedor vendedor = _context.Vendedor.Find(id);
+
+            _context.Vendedor.Remove(vendedor);
             _context.SaveChanges();
         }
     }
