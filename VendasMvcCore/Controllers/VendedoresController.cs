@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using VendasMvcCore.Models;
 using VendasMvcCore.Models.ViewModels;
 using VendasMvcCore.Services;
+using VendasMvcCore.Services.Exceptions;
 
 namespace VendasMvcCore.Controllers
 {
@@ -25,7 +28,7 @@ namespace VendasMvcCore.Controllers
 
         public IActionResult Cadastrar()
         {
-            var departamentos = _departamentoService.Listar();
+            List<Departamento> departamentos = _departamentoService.Listar();
             var viewModel = new VendedorViewModel { Departamentos = departamentos };
             return View(viewModel);
         }
@@ -77,6 +80,46 @@ namespace VendasMvcCore.Controllers
             }
 
             return View(vendedor);
+        }
+
+        public IActionResult Editar(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            Vendedor vendedor = _vendedorService.BuscaPorId(id.Value);
+            if (vendedor == null)
+            {
+                return NotFound();
+            }
+
+            List<Departamento> departamentos = _departamentoService.Listar();
+            VendedorViewModel viewModel = new VendedorViewModel { Vendedor = vendedor, Departamentos = departamentos };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Editar(int id, Vendedor vendedor)
+        {
+            if (id != vendedor.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _vendedorService.Editar(vendedor);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

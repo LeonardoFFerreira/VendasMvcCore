@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using VendasMvcCore.Data;
 using VendasMvcCore.Models;
+using VendasMvcCore.Services.Exceptions;
 
 namespace VendasMvcCore.Services
 {
@@ -41,6 +40,24 @@ namespace VendasMvcCore.Services
 
             _context.Vendedor.Remove(vendedor);
             _context.SaveChanges();
+        }
+
+        public void Editar(Vendedor vendedor)
+        {
+            if (!_context.Vendedor.Any(v => v.Id == vendedor.Id))
+            {
+                throw new NotFoundException("Vendedor não encontrado");
+            }
+            try
+            {
+                _context.Update(vendedor);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+
         }
     }
 }
