@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using VendasMvcCore.Models;
 using VendasMvcCore.Models.ViewModels;
 using VendasMvcCore.Services;
-using VendasMvcCore.Services.Exceptions;
 
 namespace VendasMvcCore.Controllers
 {
@@ -45,14 +45,14 @@ namespace VendasMvcCore.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id nulo ou inválido" });
             }
 
             Vendedor vendedor = _vendedorService.BuscaPorId(id.Value);
 
             if (vendedor == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
 
             return View(vendedor);
@@ -70,13 +70,13 @@ namespace VendasMvcCore.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id nulo ou inválido" });
             }
 
             Vendedor vendedor = _vendedorService.BuscaPorId(id.Value);
             if (vendedor == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
 
             return View(vendedor);
@@ -86,12 +86,12 @@ namespace VendasMvcCore.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id nulo ou inválido" });
             }
             Vendedor vendedor = _vendedorService.BuscaPorId(id.Value);
             if (vendedor == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
 
             List<Departamento> departamentos = _departamentoService.Listar();
@@ -105,21 +105,24 @@ namespace VendasMvcCore.Controllers
         {
             if (id != vendedor.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Os Id's fornecidos são imcompatíveis" });
             }
             try
             {
                 _vendedorService.Editar(vendedor);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
-            {
-                return BadRequest();
-            }
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewmodel = new ErrorViewModel { Message = message, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
+
+            return View(viewmodel);
         }
     }
 }
