@@ -37,6 +37,12 @@ namespace VendasMvcCore.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Cadastrar(Vendedor vendedor)
         {
+            if (!ModelState.IsValid)
+            {
+                List<Departamento> departamentos = _departamentoService.Listar();
+                VendedorViewModel viewModel = new VendedorViewModel { Vendedor = vendedor, Departamentos = departamentos };
+                return View(viewModel);
+            }
             _vendedorService.Cadastrar(vendedor);
             return RedirectToAction(nameof(Index));
         }
@@ -103,6 +109,13 @@ namespace VendasMvcCore.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Editar(int id, Vendedor vendedor)
         {
+            if (!ModelState.IsValid)
+            {
+                List<Departamento> departamentos = _departamentoService.Listar();
+                VendedorViewModel viewModel = new VendedorViewModel { Vendedor = vendedor, Departamentos = departamentos };
+                return View(viewModel);
+            }
+
             if (id != vendedor.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Os Id's fornecidos são imcompatíveis" });
