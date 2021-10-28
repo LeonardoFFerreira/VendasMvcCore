@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VendasMvcCore.Data;
 using VendasMvcCore.Models;
 
@@ -14,9 +16,9 @@ namespace VendasMvcCore.Services
             _context = context;
         }
 
-        public List<Departamento> Listar()
+        public async Task<List<Departamento>> ListarAsync()
         {
-            return _context.Departamento.OrderBy(d => d.Nome).ToList();
+            return await _context.Departamento.OrderBy(d => d.Nome).ToListAsync();
         }
     }
 }
