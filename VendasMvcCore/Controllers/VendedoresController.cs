@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using VendasMvcCore.Models;
 using VendasMvcCore.Models.ViewModels;
 using VendasMvcCore.Services;
+using VendasMvcCore.Services.Exceptions;
 
 namespace VendasMvcCore.Controllers
 {
@@ -69,8 +70,15 @@ namespace VendasMvcCore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Deletar(int id)
         {
-            await _vendedorService.DeletarAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _vendedorService.DeletarAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public async Task<IActionResult> Detalhes(int? id)

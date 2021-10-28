@@ -37,10 +37,17 @@ namespace VendasMvcCore.Services
 
         public async Task DeletarAsync(int id)
         {
-            Vendedor vendedor = await _context.Vendedor.FindAsync(id);
+            try
+            {
+                Vendedor vendedor = await _context.Vendedor.FindAsync(id);
 
-            _context.Vendedor.Remove(vendedor);
-            await _context.SaveChangesAsync();
+                _context.Vendedor.Remove(vendedor);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException("Erro de integridade de dados - Não é possível delelar um vendedor que possi vendas vinculadas");
+            }
         }
 
         public async Task EditarAsync(Vendedor vendedor)
