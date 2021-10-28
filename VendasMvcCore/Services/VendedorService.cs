@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VendasMvcCore.Data;
 using VendasMvcCore.Models;
 using VendasMvcCore.Services.Exceptions;
@@ -18,40 +19,42 @@ namespace VendasMvcCore.Services
 
         }
 
-        public List<Vendedor> Listar()
+        public async Task<List<Vendedor>> ListarAsync()
         {
-            return _context.Vendedor.ToList();
+            return await _context.Vendedor.ToListAsync();
         }
 
-        public void Cadastrar(Vendedor vendedor)
+        public async Task CadastrarAsync(Vendedor vendedor)
         {
             _context.Add(vendedor);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Vendedor BuscaPorId(int id)
+        public async Task<Vendedor> BuscaPorIdAsync(int id)
         {
-            return _context.Vendedor.Include(v => v.Departamento).FirstOrDefault(v => v.Id == id);
+            return await _context.Vendedor.Include(v => v.Departamento).FirstOrDefaultAsync(v => v.Id == id);
         }
 
-        public void Deletar(int id)
+        public async Task DeletarAsync(int id)
         {
-            Vendedor vendedor = _context.Vendedor.Find(id);
+            Vendedor vendedor = await _context.Vendedor.FindAsync(id);
 
             _context.Vendedor.Remove(vendedor);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Editar(Vendedor vendedor)
+        public async Task EditarAsync(Vendedor vendedor)
         {
-            if (!_context.Vendedor.Any(v => v.Id == vendedor.Id))
+            bool contenm = await _context.Vendedor.AnyAsync(v => v.Id == vendedor.Id);
+
+            if (!contenm)
             {
                 throw new NotFoundException("Vendedor não encontrado");
             }
             try
             {
                 _context.Update(vendedor);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {
