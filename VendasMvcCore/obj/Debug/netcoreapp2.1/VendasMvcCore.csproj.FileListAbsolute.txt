@@ -43,3 +43,4 @@ Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Vie
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Vendedores\Deletar.cshtml.g.cs
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Vendedores\Detalhes.cshtml.g.cs
 Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Vendedores\Editar.cshtml.g.cs
+Z:\DEV\BACK-END\C#\VendasMvcCore\VendasMvcCore\obj\Debug\netcoreapp2.1\Razor\Views\Pedidos\Index.cshtml.g.cs
