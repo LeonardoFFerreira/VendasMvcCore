@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VendasMvcCore.Models;
 using VendasMvcCore.Services;
@@ -38,9 +39,23 @@ namespace VendasMvcCore.Controllers
 
             return View(list);
         }
-        public IActionResult BuscaAgrupada()
+        public async Task<IActionResult> BuscaAgrupada(DateTime? minDate, DateTime? maxDate)
         {
-            return View();
+            if (!minDate.HasValue)
+            {
+                minDate = new DateTime(DateTime.Now.Year, 1, 1);
+            }
+            if (!maxDate.HasValue)
+            {
+                maxDate = DateTime.Now;
+            }
+
+            ViewData["minDate"] = minDate.Value.ToString("yyyy-MM-dd");
+            ViewData["maxDate"] = maxDate.Value.ToString("yyyy-MM-dd");
+
+            List<IGrouping<Departamento, Pedido>> list = await _pedidoService.BuscaAgrupadaAsync(minDate, maxDate);
+
+            return View(list);
         }
     }
 }
